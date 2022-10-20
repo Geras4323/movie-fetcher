@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.g_grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 144px);
+  gap: 28px;
+  place-content: center;
+}
