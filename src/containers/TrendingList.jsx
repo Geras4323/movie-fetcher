@@ -12,7 +12,7 @@ function TrendingList() {
     async function getTrendingPreview() {
       getData({path: 'trending/all/day'})
         .then(data => data.results)
-        .then(movies => setTrending(movies))
+        .then(movieList => setTrending(movieList))
     }
     getTrendingPreview();
   }, [])
