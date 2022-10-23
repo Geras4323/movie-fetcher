@@ -11,4 +11,12 @@ html {
   grid-template-columns: repeat(auto-fill, 144px);
   gap: 28px;
   place-content: center;
+  margin-top: 24px;
+}
+
+.g_grid-genres {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 144px);
+  gap: 14px;
+  place-content: center;
 }

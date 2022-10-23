@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { getData } from '@functions/getData';
-import { Search } from '@components/Search';
+// import { Search } from '@components/Search';
 import { RelatedList } from '@containers/RelatedList';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
@@ -50,9 +50,12 @@ export default function Detail() {
                 <div className="w-full h-full absolute top-0 bg-gradient-to-b from-transparent via-transparent to-slate-700">
                   <section className="h-14 flex flex-row items-center justify-start p-2 bg-gradient-to-b from-slate-900 to-transparent bg-opacity-50">
                     <Link href="/">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" className='w-10 h-8 fill-current text-white   hover:cursor-pointer'>
-                        <path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
-                      </svg>
+                      <section className="flex flex-row items-center gap-1   hover:cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" className='w-10 h-8 fill-current text-gray-100'>
+                          <path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
+                        </svg>
+                        <p className="text-xl text-gray-100 font-bold">Home</p>
+                      </section>
                     </Link>
                   </section>
                 </div>

@@ -16,7 +16,7 @@ function RelatedList({ id }) {
   })
 
   return (
-    <div className="w-full h-auto bg-slate-500 overflow-x-auto">
+    <div className="w-full h-auto overflow-x-scroll">
       <div className="h-full flex">
         <div className="flex flex-row gap-x-4">
           {relateds.map((related) => (

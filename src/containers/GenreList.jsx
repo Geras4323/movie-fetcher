@@ -17,15 +17,16 @@ function GenreList() {
 
 
   return (
-    <>
-      <div className="w-full h-auto bg-red-500 g_grid-container">
+    <div className="mb-8">
+      <p className="mb-4 text-2xl text-white font-semibold">Search by Genre</p>
+      <div className="w-full h-auto g_grid-genres">
         {genres.map((genre) => (
           <Link href={`/genres/${genre.name}`} key={genre.id}>
-            <a>{genre.name}</a>
+            <a className="h-8 text-center text-xl text-gray-300 rounded-lg border border-border">{genre.name}</a>
           </Link>
         ))}
       </div>
-    </>
+    </div>
   );
 }
 

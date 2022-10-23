@@ -1,16 +1,16 @@
 import React from 'react';
 
-import { TrendingCard } from '@components/TrendingCard';
+import { ScrollCard } from '@components/ScrollCard';
 import { getData } from '@functions/getData';
 import Link from 'next/link';
 
-function TrendingList() {
+function MovieScroll({ path, sectionTitle, seeMore }) {
   const [trending, setTrending] = React.useState([]);
 
 
   React.useEffect(() => {
     async function getTrendingPreview() {
-      getData({path: 'trending/all/day'})
+      getData({path: path})
         .then(data => data.results)
         .then(movieList => setTrending(movieList))
     }
@@ -19,20 +19,21 @@ function TrendingList() {
 
 
   return (
-    <>
-      <section className="w-full h-8 mb-4 px-4 flex flex-row justify-between items-center">
-        <p className="text-2xl font-semibold">Trending</p>
-        <Link href="/trending">
-          <button className="w-24 h-full border border-border rounded-lg">See more</button>
-        </Link>
+    <div className="mt-10 border-t border-gray-500 rounded-xl">
+      <section className="w-full h-8 my-4 px-4 flex flex-row justify-between items-end">
+        <p className="text-2xl text-white font-semibold">{sectionTitle}</p>
+        {seeMore &&
+          <Link href="/trending">
+            <button className="w-24 h-full text-white border border-border rounded-lg">See more</button>
+          </Link>
+        }
       </section>
 
-      <div className="w-full h-auto mb-4 bg-slate-500 overflow-x-scroll">
+      <div className="w-full h-auto overflow-x-scroll">
         <div className="h-full flex">
           <div className="flex flex-row gap-x-4">
             {trending.map((movie) => (
-
-              <TrendingCard
+              <ScrollCard
                 key={movie.id}
                 movie={movie}
               />
@@ -40,10 +41,10 @@ function TrendingList() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
-export { TrendingList };
+export { MovieScroll };
 
 // movie.poster_path &&  //only if the movie´s image is available
