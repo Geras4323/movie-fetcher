@@ -13,7 +13,7 @@ function RelatedList({ id }) {
         .then(relatedList => setRelated(relatedList))
     }
     getRelatedList();
-  })
+  }, [])
 
   return (
     <div className="w-full h-auto overflow-x-scroll">
