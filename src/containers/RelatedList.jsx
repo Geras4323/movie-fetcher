@@ -2,9 +2,11 @@ import React from 'react';
 
 import { getData } from '@functions/getData';
 import { RelatedCard } from '@components/RelatedCard';
+import { useRouter } from 'next/router';
 
 function RelatedList({ id }) {
   const [relateds, setRelated] = React.useState([]);
+  const router = useRouter();
 
   React.useEffect(() => {
     async function getRelatedList() {
@@ -13,7 +15,7 @@ function RelatedList({ id }) {
         .then(relatedList => setRelated(relatedList))
     }
     getRelatedList();
-  }, [])
+  }, [router.query])
 
   return (
     <div className="w-full h-auto overflow-x-scroll">
