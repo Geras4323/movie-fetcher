@@ -20,3 +20,16 @@ html {
   gap: 14px;
   place-content: center;
 }
+
+.g_loading-skeleton {
+  animation: loading-skeleton infinite 2s;
+}
+
+@keyframes loading-skeleton {
+  0%, 100% {
+    opacity: 35%;
+  }
+  50% {
+    opacity: 15%;
+  }
+}
