@@ -12,7 +12,10 @@ function Movie({ movie }) {
       onClick={() => router.push(`/movie/${movie.id}`)}
     >
       <div className="w-auto h-auto flex flex-col">
-        <Image className="rounded-xl" width={144} height={208} src={'https://image.tmdb.org/t/p/w300' + movie.poster_path} alt="" />
+        {movie.poster_path
+          ? <Image className="rounded-xl" width={144} height={208} src={'https://image.tmdb.org/t/p/w300' + movie.poster_path} alt="" />
+          : <Image className="rounded-xl bg-black bg-opacity-30" width={144} height={208} src={'/noimage.png'} alt="" />
+        }
         <p className="py-2 px-4 text-white font-semibold">{movie.name || movie.title}</p>
       </div>
     </div>
