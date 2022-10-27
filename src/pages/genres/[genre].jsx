@@ -11,6 +11,7 @@ export default function GenreMovies() {
   const [currentGenre, setCurrentGenre] = React.useState();
   // const [currentGenreID, setCurrentGenreID] = React.useState();  // not currently used
   const [filteredMovies, setFilteresMovies] = React.useState([]);
+  const [page, setPage] = React.useState(1);
   const [loading, setLoading] = React.useState(true)
   const router = useRouter();
 
@@ -22,9 +23,9 @@ export default function GenreMovies() {
         try {
           const id = genreData.id;  // gets the ID
           // setCurrentGenreID(id);
-          getData({path: '/discover/movie', genresIDs: id})  // finds the movies that match with that genre's ID
+          getData({path: '/discover/movie', genresIDs: id, page: page})  // finds the movies that match with that genre's ID
           .then(genreMovies => genreMovies.results)
-          .then(movies => setFilteresMovies(movies))
+          .then(movies => setFilteresMovies(prev => prev.concat(movies)))
           .then(() => setLoading(false))
           // .then(() => console.log('done'))
         } catch (error) { // leave this here, patches an "error". It actually works. I don't know why it shows an error
@@ -37,7 +38,7 @@ export default function GenreMovies() {
     const { genre } = router.query;
     setCurrentGenre(genre);
     findGenreId(genre);
-  }, [router.query])
+  }, [router.query, page])
 
   return (
     <div className="p-4">
@@ -66,13 +67,23 @@ export default function GenreMovies() {
               <MovieSkeleton />
               <MovieSkeleton />
             </div>
-          : <div className="g_grid-container">
-              {filteredMovies.map((movie) => (
-                <Movie
-                  key={movie.id}
-                  movie={movie}
-                />
-              ))}
+          : <div>
+              <div className="g_grid-container">
+                {filteredMovies.map((movie) => (
+                  <Movie
+                    key={movie.id}
+                    movie={movie}
+                  />
+                ))}
+              </div>
+              <div className="w-full h-auto mt-6 flex justify-center">
+                <button
+                  onClick={() => setPage(prev => prev + 1)}
+                  className="w-24 h-10 bg-black bg-opacity-50 rounded-lg"
+                >
+                  See more
+                </button>
+              </div>
             </div>
         }
       </section>
