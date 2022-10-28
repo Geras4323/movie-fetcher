@@ -15,6 +15,26 @@ export default function GenreMovies() {
   const [loading, setLoading] = React.useState(true)
   const router = useRouter();
 
+
+  const options = {
+    root: null,
+    rootMargin: '200px',
+  }
+  //Infinite Scrolling
+  const observer = React.useRef()
+  const endOfList = React.useCallback(node => {
+    if (loading) return;
+    if (observer.current) observer.current.disconnect();
+    observer.current = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        console.log('working')
+        setPage(prevPage => prevPage + 1)
+      }
+    }, options)
+    if (node) observer.current.observe(node);
+  }, [loading])
+
+
   function findGenreId(genreName) {
     getData({path: 'genre/movie/list'}) // find the genre's ID
       .then(data => data.genres)
@@ -76,13 +96,16 @@ export default function GenreMovies() {
                   />
                 ))}
               </div>
-              <div className="w-full h-auto mt-6 flex justify-center">
-                <button
+              <div
+                ref={endOfList}
+                className="w-full h-4 mt-6 flex justify-center"
+              >
+                {/* <button
                   onClick={() => setPage(prev => prev + 1)}
                   className="w-24 h-10 bg-black bg-opacity-50 rounded-lg"
                 >
                   See more
-                </button>
+                </button> */}
               </div>
             </div>
         }
