@@ -12,7 +12,8 @@ export default function GenreMovies() {
   // const [currentGenreID, setCurrentGenreID] = React.useState();  // not currently used
   const [filteredMovies, setFilteresMovies] = React.useState([]);
   const [page, setPage] = React.useState(1);
-  const [loading, setLoading] = React.useState(true)
+  const [lastPage, setLastPage] = React.useState();
+  const [loading, setLoading] = React.useState(true);
   const router = useRouter();
 
 
@@ -24,10 +25,11 @@ export default function GenreMovies() {
   const observer = React.useRef()
   const endOfList = React.useCallback(node => {
     if (loading) return;
+    if (page === lastPage) return;
     if (observer.current) observer.current.disconnect();
     observer.current = new IntersectionObserver(entries => {
       if (entries[0].isIntersecting) {
-        console.log('working')
+        // console.log('working');
         setPage(prevPage => prevPage + 1)
       }
     }, options)
@@ -44,8 +46,10 @@ export default function GenreMovies() {
           const id = genreData.id;  // gets the ID
           // setCurrentGenreID(id);
           getData({path: '/discover/movie', genresIDs: id, page: page})  // finds the movies that match with that genre's ID
-          .then(genreMovies => genreMovies.results)
-          .then(movies => setFilteresMovies(prev => prev.concat(movies)))
+          .then(genreMovies => {
+            setFilteresMovies(prev => prev.concat(genreMovies.results))
+            if (!lastPage) setLastPage(genreMovies.total_pages)
+          })
           .then(() => setLoading(false))
           // .then(() => console.log('done'))
         } catch (error) { // leave this here, patches an "error". It actually works. I don't know why it shows an error

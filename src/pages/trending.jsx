@@ -8,17 +8,42 @@ import Link from 'next/link';
 
 export default function Trending() {
   const [trending, setTrending] = React.useState([]);
+  const [page, setPage] = React.useState(1);
+  const [lastPage, setLastPage] = React.useState();
   const [loading, setLoading] = React.useState(true);
+
+
+    const options = {
+    root: null,
+    rootMargin: '200px',
+  }
+  //Infinite Scrolling
+  const observer = React.useRef()
+  const endOfList = React.useCallback(node => {
+    if (loading) return;
+    if (page === lastPage) return;
+    if (observer.current) observer.current.disconnect();
+    observer.current = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        // console.log('working');
+        setPage(prevPage => prevPage + 1)
+      }
+    }, options)
+    if (node) observer.current.observe(node);
+  }, [loading])
+
 
   React.useEffect(() => {
     async function getTrendingPreview() {
-      getData({path: 'trending/all/day'})
-        .then(data => data.results)
-        .then(movies => setTrending(movies))
+      getData({path: 'trending/all/day', page: page})
+        .then(data => {
+          setTrending(trending => trending.concat(data.results));
+          if (!lastPage) setLastPage(data.total_pages);
+        })
         .then(() => setLoading(false))
     }
     getTrendingPreview();
-  }, [])
+  }, [page])
 
   return (
     <div className="p-4">
@@ -49,6 +74,17 @@ export default function Trending() {
             </div>
           </section>
       }
+      <div
+        ref={endOfList}
+        className="w-full h-4 mt-6 flex justify-center"
+      >
+        {/* <button
+          onClick={() => setPage(prev => prev + 1)}
+          className="w-24 h-10 bg-black bg-opacity-50 rounded-lg"
+        >
+          See more
+        </button> */}
+      </div>
     </div>
   )
 }
