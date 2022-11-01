@@ -8,16 +8,14 @@ function Movie({ movie }) {
 
   return (
     <div
-      className="w-full h-full flex justify-center bg-black bg-opacity-30 rounded-xl   hover:cursor-pointer"
+      className="w-36 h-full flex flex-col justify-start bg-black bg-opacity-30 rounded-xl   hover:cursor-pointer"
       onClick={() => router.push(`/movie/${movie.id}`)}
     >
-      <div className="w-auto h-auto flex flex-col">
-        {movie.poster_path
-          ? <Image className="rounded-xl" width={144} height={208} src={'https://image.tmdb.org/t/p/w300' + movie.poster_path} alt="" />
-          : <Image className="rounded-xl bg-black bg-opacity-30" width={144} height={208} src={'/noimage.png'} alt="" />
-        }
-        <p className="py-2 px-4 text-white font-semibold">{movie.name || movie.title}</p>
-      </div>
+      {movie.poster_path
+        ? <Image className="rounded-xl" width={144} height={208} src={'https://image.tmdb.org/t/p/w300' + movie.poster_path} alt={movie.name || movie.title} />
+        : <Image className="rounded-xl bg-black bg-opacity-30" width={144} height={208} src={'/noimage.png'} alt="No image found" />
+      }
+      <p className="py-2 px-4 text-white font-semibold">{movie.name || movie.title}</p>
     </div>
   )
 }

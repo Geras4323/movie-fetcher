@@ -47,8 +47,8 @@ export default function Detail() {
             <div className="fixed top-0 left-0 right-0 -z-10">
               <div className="relative top-0 h-160">
                 <img className="w-full h-full object-cover" src={`https://image.tmdb.org/t/p/w500${imagen}`} alt="" />
-                <div className="w-full h-full absolute top-0 bg-gradient-to-b from-transparent via-transparent to-slate-700">
-                  <section className="h-14 flex flex-row items-center justify-start p-2 bg-gradient-to-b from-slate-900 to-transparent bg-opacity-50">
+                <div className="w-full h-full absolute top-0 flex flex-col gap-y-12 items-center bg-gradient-to-b from-transparent via-transparent to-slate-700   md:backdrop-blur-sm">
+                  <section className="w-full h-14 flex flex-row items-center justify-start p-2 bg-gradient-to-b from-slate-900 to-transparent bg-opacity-50">
                     <Link href="/">
                       <section className="flex flex-row items-center gap-1   hover:cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" className='w-10 h-8 fill-current text-gray-100'>
@@ -58,9 +58,14 @@ export default function Detail() {
                       </section>
                     </Link>
                   </section>
+                  {imagen
+                    ? <img className="w-80 rounded-2xl border border-border" src={`https://image.tmdb.org/t/p/w500${imagen}`} alt={movie.name || movie.title} />
+                    : <img className="w-80 rounded-2xl border border-border bg-black bg-opacity-50" src={'/noimage.png'} alt="No image found" />
+                  }
                 </div>
               </div>
             </div>
+
             <div className="w-full h-auto p-4 bg-black bg-opacity-50 rounded-t-2xl z-10 absolute top-160 flex flex-col gap-4">
               <section className="w-full flex flex-row justify-between items-end gap-x-4">
                 <p className="w-auto text-2xl text-white font-semibold">{movieDetails.title}</p>

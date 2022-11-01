@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { ScrollCard } from '@components/ScrollCard';
+import { Movie } from '@components/Movie';
 import { getData } from '@functions/getData';
 import Link from 'next/link';
 
@@ -33,7 +34,7 @@ function MovieScroll({ path, sectionTitle, seeMore }) {
         <div className="h-full flex">
           <div className="flex flex-row gap-x-4">
             {trending.map((movie) => (
-              <ScrollCard
+              <Movie
                 key={movie.id}
                 movie={movie}
               />
