@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Movie } from '@components/Movie';
 import { FavouritesContext } from '@contexts/FavouritesContext';
 
-export default function favourites() {
+export default function Favourites() {
   const { localFavourites } = React.useContext(FavouritesContext);
 
   return (
@@ -28,7 +28,7 @@ export default function favourites() {
               ))}
             </div>
           : <div>
-              <p className="mt-12 px-4 text-center text-gray-200 text-lg   sm:text-xl">Oops! We couldn't find any favourite movies :(</p>
+              <p className="mt-12 px-4 text-center text-gray-200 text-lg   sm:text-xl">Oops! We couldn&apos;t find any favourite movies :(</p>
             </div>
         }
       </section>
