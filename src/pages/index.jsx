@@ -6,12 +6,12 @@ import { Search } from '@components/Search';
 import { MovieScroll } from '@containers/MovieScroll';
 import { GenreList } from '@containers/GenreList';
 
-import { useFavourites } from 'hooks/useFavourites';
+import { FavouritesContext } from '@contexts/FavouritesContext';
 
 
 export default function Home() {
-  const { dataLS } = useFavourites();
-  const favsAvailable = dataLS.length >= 1;
+  const { localFavourites } = React.useContext(FavouritesContext);
+  const favsAvailable = localFavourites.length >= 1;
 
   return (
     <>

@@ -5,12 +5,13 @@ import { Movie } from '@components/Movie';
 import { getData } from '@functions/getData';
 import Link from 'next/link';
 
-import { useFavourites } from '@hooks/useFavourites';
+// import { useFavourites } from '@hooks/useFavourites';
+import { FavouritesContext } from '@contexts/FavouritesContext';
 
 function MovieScroll({ path, sectionTitle, seeMore, morePath }) {
   const [movies, setMovies] = React.useState([]);
-  const { dataLS } = useFavourites();
-  let target = path ? movies : dataLS;
+  const { localFavourites } = React.useContext(FavouritesContext);
+  let target = path ? movies : localFavourites;
 
 
   React.useEffect(() => {

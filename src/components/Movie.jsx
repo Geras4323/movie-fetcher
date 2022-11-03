@@ -8,13 +8,12 @@ import { useFavourites } from '@hooks/useFavourites';
 function Movie({ movie }) {
   const router = useRouter();
   const {
-    dataLS,
-    dataLSIDs,
+    localFavouritesIDs,
     addToFavourites,
     removeFromFavourites
-  } = useFavourites()
-  console.log(dataLSIDs);
-  const isFavourite = dataLSIDs.includes(movie.id)
+  } = useFavourites() // no necesito el ocntexto aca porque ya tengo useFavourites que usa el context y me da la info que necesito
+  const isFavourite = localFavouritesIDs.includes(movie.id)
+
 
 
   return (

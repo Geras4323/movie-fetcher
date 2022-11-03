@@ -1,35 +1,43 @@
 import React from 'react';
 
 import { useLocalStorage } from '@hooks/useLocalStorage';
+import { FavouritesContext } from '@contexts/FavouritesContext';
 
 function useFavourites() {
   const {
-    dataLS,
     saveLSData
   } = useLocalStorage('FAVS', [])
 
-  const dataLSIDs = React.useMemo(() => { // do it once, redo it only when dataLS changes
-    const ids = dataLS.map((movie => movie.id))
+  const {
+    localFavourites,
+    setLocalFavourites
+  } = React.useContext(FavouritesContext);
+
+
+
+  const localFavouritesIDs = React.useMemo(() => { // do it once, redo it only when dataLS changes
+    const ids = localFavourites.map((movie => movie.id))
     return ids;
-  }, [dataLS])
+  }, [localFavourites])
 
   function addToFavourites(movie) {
-    const movies = [...dataLS];
+    const movies = [...localFavourites];
     movies.push(movie);
+    setLocalFavourites(movies)
     saveLSData(movies);
-    console.log('added');
+    // console.log('added');
   }
 
   function removeFromFavourites(movie) {
-    const oldMovies = [...dataLS]
-    const filtered = oldMovies.filter(oldMovie => oldMovie.id !== movie.id)
+    const oldMovies = [...localFavourites];
+    const filtered = oldMovies.filter(oldMovie => oldMovie.id !== movie.id);
+    setLocalFavourites(filtered);
     saveLSData(filtered);
-    console.log('removed');
+    // console.log('removed');
   }
 
   return {
-    dataLS,
-    dataLSIDs,
+    localFavouritesIDs,
     addToFavourites,
     removeFromFavourites
   }
