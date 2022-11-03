@@ -2,11 +2,10 @@ import React from 'react';
 import Link from 'next/link';
 
 import { Movie } from '@components/Movie';
-import { useFavourites } from 'hooks/useFavourites';
-
+import { FavouritesContext } from '@contexts/FavouritesContext';
 
 export default function favourites() {
-  const { dataLS } = useFavourites();
+  const { localFavourites } = React.useContext(FavouritesContext);
 
   return (
     <div className="p-4">
@@ -19,14 +18,19 @@ export default function favourites() {
           </Link>
           <p className="text-2xl text-white font-semibold mb-4">Your Favourites</p>
         </div>
-        <div className="g_grid-container">
-          {dataLS.map((movie) => (
-            <Movie
-              key={movie.id}
-              movie={movie}
-            />
-          ))}
-        </div>
+        {localFavourites.length >= 1
+          ? <div className="g_grid-container">
+              {localFavourites.map((movie) => (
+                <Movie
+                  key={movie.id}
+                  movie={movie}
+                />
+              ))}
+            </div>
+          : <div>
+              <p className="mt-12 px-4 text-center text-gray-200 text-lg   sm:text-xl">Oops! We couldn't find any favourite movies :(</p>
+            </div>
+        }
       </section>
     </div>
   )
