@@ -1,21 +1,27 @@
 import React from 'react';
 
-import { ScrollCard } from '@components/ScrollCard';
+// import { ScrollCard } from '@components/ScrollCard';
 import { Movie } from '@components/Movie';
 import { getData } from '@functions/getData';
 import Link from 'next/link';
 
-function MovieScroll({ path, sectionTitle, seeMore }) {
-  const [trending, setTrending] = React.useState([]);
+import { useFavourites } from '@hooks/useFavourites';
+
+function MovieScroll({ path, sectionTitle, seeMore, morePath }) {
+  const [movies, setMovies] = React.useState([]);
+  const { dataLS } = useFavourites();
+  let target = path ? movies : dataLS;
 
 
   React.useEffect(() => {
     async function getTrendingPreview() {
       getData({path: path})
         .then(data => data.results)
-        .then(movieList => setTrending(movieList))
+        .then(movieList => setMovies(movieList))
     }
-    getTrendingPreview();
+    if (path) {
+      getTrendingPreview();
+    }
   }, [])
 
 
@@ -24,7 +30,7 @@ function MovieScroll({ path, sectionTitle, seeMore }) {
       <section className="w-full h-8 my-4 px-4 flex flex-row justify-between items-end">
         <p className="text-2xl text-white font-semibold">{sectionTitle}</p>
         {seeMore &&
-          <Link href="/trending">
+          <Link href={morePath}>
             <button className="w-24 h-full text-white border border-border rounded-lg">See more</button>
           </Link>
         }
@@ -33,7 +39,7 @@ function MovieScroll({ path, sectionTitle, seeMore }) {
       <div className="w-full h-auto overflow-x-scroll">
         <div className="h-full flex">
           <div className="flex flex-row gap-x-4">
-            {trending.map((movie) => (
+            {target.map((movie) => (
               <Movie
                 key={movie.id}
                 movie={movie}

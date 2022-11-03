@@ -6,8 +6,12 @@ import { Search } from '@components/Search';
 import { MovieScroll } from '@containers/MovieScroll';
 import { GenreList } from '@containers/GenreList';
 
+import { useFavourites } from 'hooks/useFavourites';
+
 
 export default function Home() {
+  const { dataLS } = useFavourites();
+  const favsAvailable = dataLS.length >= 1;
 
   return (
     <>
@@ -22,7 +26,15 @@ export default function Home() {
           path={'trending/all/day'}
           sectionTitle={'Trending'}
           seeMore
+          morePath={'/trending'}
         />
+        {favsAvailable &&
+          <MovieScroll
+            sectionTitle={'Your Favourites'}
+            seeMore
+            morePath={'/favourites'}
+          />
+        }
         <MovieScroll
           path={'/movie/popular'}
           sectionTitle={'Popular Movies'}
