@@ -67,7 +67,7 @@ export default function Detail() {
             <div className="fixed top-0 left-0 right-0 -z-10">
               <div className="relative top-0 h-160">
                 <img className="w-full h-full object-cover" src={`https://image.tmdb.org/t/p/w500${imagen}`} alt="" />
-                <div className="w-full h-full absolute top-0 flex flex-col gap-y-12 items-center bg-gradient-to-b from-transparent via-transparent to-slate-700   md:backdrop-blur-sm">
+                <div className="w-full h-full absolute top-0 flex flex-col gap-y-12 items-center bg-gradient-to-b from-transparent via-transparent to-slate-700   ssm:backdrop-blur-sm">
                   <section className="w-full h-14 flex flex-row items-center justify-between p-2 bg-gradient-to-b from-slate-900 to-transparent bg-opacity-50">
                     <Link href="/">
                       <section className="flex flex-row items-center gap-1   hover:cursor-pointer">
@@ -95,7 +95,7 @@ export default function Detail() {
                     }
                   </section>
                   {imagen
-                    ? <img className="w-80 rounded-2xl border border-border" src={`https://image.tmdb.org/t/p/w500${imagen}`} alt={movieDetails.name || movieDetails.title} />
+                    ? <img className="w-80 rounded-2xl border border-border hidden   ssm:block" src={`https://image.tmdb.org/t/p/w500${imagen}`} alt={movieDetails.name || movieDetails.title} />
                     : <img className="w-80 rounded-2xl border border-border bg-black bg-opacity-50" src={'/noimage.png'} alt="No image found" />
                   }
                 </div>

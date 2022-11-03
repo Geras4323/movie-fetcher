@@ -44,7 +44,10 @@ module.exports = {
       },
       gridTemplateColumns: {
         'autosm': 'repeat(auto-fill, 140px)',
-        'automd': 'repeat(auto-fill, 240px)'
+        'automd': 'repeat(auto-fill, 240px)',
+      },
+      screens: {
+        'ssm': '510px',
       }
     },
   },
