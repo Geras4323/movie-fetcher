@@ -1,0 +1,4 @@
+el contexto tiene que tener solo un array de favoritos
+ese array se tiene que llenar una sola vez cuando entramos a la página
+vamos a ir modificando el array del contexto para guardar o eliminar favoritos (todo en local)
+vamos a ir guardando ese array en LS, pero esto solo es para mantener los favoritos

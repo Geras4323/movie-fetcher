@@ -13,7 +13,7 @@ export default function Trending() {
   const [loading, setLoading] = React.useState(true);
 
 
-    const options = {
+  const options = {
     root: null,
     rootMargin: '200px',
   }

@@ -1,29 +1,30 @@
 import React from 'react';
 
-// import { ScrollCard } from '@components/ScrollCard';
 import { Movie } from '@components/Movie';
 import { getData } from '@functions/getData';
 import Link from 'next/link';
 
-// import { useFavourites } from '@hooks/useFavourites';
 import { FavouritesContext } from '@contexts/FavouritesContext';
+import { LanguageContext } from '@contexts/LanguageContext';
+
 
 function MovieScroll({ path, sectionTitle, seeMore, morePath }) {
   const [movies, setMovies] = React.useState([]);
+  const { currentLanguage } = React.useContext(LanguageContext);
   const { localFavourites } = React.useContext(FavouritesContext);
-  let target = path ? movies : localFavourites;
+  const target = path ? movies : localFavourites;
 
 
   React.useEffect(() => {
     async function getTrendingPreview() {
-      getData({path: path})
+      getData({path: path, lang: currentLanguage})
         .then(data => data.results)
         .then(movieList => setMovies(movieList))
     }
     if (path) {
       getTrendingPreview();
     }
-  }, [])
+  }, [currentLanguage])
 
 
   return (

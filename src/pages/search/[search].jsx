@@ -6,15 +6,19 @@ import { Search } from '@components/Search';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
+import { LanguageContext } from '@contexts/LanguageContext';
+
+
 export default function Searched() {
   const [searchValue, setSearchValue] = React.useState();
   const [loading, setLoading] = React.useState(true);
   const [foundMovies, setFoundMovies] = React.useState([]);
+  const { currentLanguage } = React.useContext(LanguageContext);
   const router = useRouter();
 
   function searchMovies(busqueda) {
     try {
-      getData({path: '/search/movie', search: busqueda})
+      getData({path: '/search/movie', search: busqueda, lang: currentLanguage})
         .then(data => data.results)
         .then(movies => setFoundMovies(movies))
         // .then(() => console.log('doneSearch')) //just for acknowledge purposes
@@ -30,7 +34,7 @@ export default function Searched() {
     const { search } = router.query;
     setSearchValue(search);
     searchMovies(search);
-  }, [router.query])
+  }, [router.query, currentLanguage])
 
   return (
     <div className="p-4">

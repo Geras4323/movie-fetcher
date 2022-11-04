@@ -1,19 +1,21 @@
 import React from 'react';
 
 import { getData } from '@functions/getData';
+import { LanguageContext } from '@contexts/LanguageContext';
 import Link from 'next/link';
 
 function GenreList() {
   const [genres, setGenres] = React.useState([]);
+  const { currentLanguage } = React.useContext(LanguageContext);
 
   React.useEffect(() => {
     async function getGenreList() {
-      getData({path: 'genre/movie/list'})
+      getData({path: 'genre/movie/list', lang: currentLanguage})
         .then(data => data.genres)
         .then(genres => setGenres(genres))
     }
     getGenreList();
-  }, [])
+  }, [currentLanguage])
 
 
   return (

@@ -6,6 +6,8 @@ import { useFavourites } from 'hooks/useFavourites';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
+import { LanguageContext } from '@contexts/LanguageContext';
+
 
 export default function Detail() {
   const {
@@ -14,7 +16,6 @@ export default function Detail() {
     removeFromFavourites
   } = useFavourites() // no necesito el ocntexto aca porque ya tengo useFavourites que usa el context y me da la info que necesito
 
-
   // const [currentMovieID, setCurrentMovieID] = React.useState()
   const [movieDetails, setMovieDetails] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
@@ -22,9 +23,11 @@ export default function Detail() {
   const [imagen, setImagen] = React.useState()
   const [isFavourite, setIsFavourite] = React.useState(false)
 
+  const { currentLanguage } = React.useContext(LanguageContext);
+
   async function getDetails(id) {
     try {
-      await getData({path: `/movie/${id}`})
+      await getData({path: `/movie/${id}`, lang: currentLanguage})
         .then(details => {
           setMovieDetails(details)
           setImagen(details.poster_path)
@@ -50,7 +53,7 @@ export default function Detail() {
     const { id } = router.query;
     // setCurrentMovieID(id);
     getDetails(id);
-  }, [router.query])
+  }, [router.query, currentLanguage])
 
 
   return (

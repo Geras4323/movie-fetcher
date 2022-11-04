@@ -12,12 +12,14 @@ const api = axios.create({
     }
 })
 
-async function getData({path, genresIDs, search, page}) {
+async function getData({path, genresIDs, search, page, lang}) {
+  // console.log(lang);
   const {data} = await api.get(path, {
     params: {
       'with_genres': `${genresIDs}`,
       'query': `${search}`,
       'page': page,
+      'language': lang,
     }
   });
   return data;

@@ -1,14 +1,13 @@
 import React from 'react';
 
+import { Search } from '@components/Search';
+import { LanguageChanger } from '@components/LanguageChanger';
+
 function Header() {
   return (
-    <div className='w-4/5 h-12 bg-indigo-300 flex flex-row justify-between rounded-full'>
-      <div>
-        hola
-      </div>
-      <div>
-        chau
-      </div>
+    <div className="w-full h-auto flex flex-row gap-x-4 justify-between">
+      <Search />
+      <LanguageChanger />
     </div>
   )
 }

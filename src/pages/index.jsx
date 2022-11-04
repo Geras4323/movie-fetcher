@@ -3,6 +3,7 @@ import React from 'react';
 import Head from 'next/head'
 
 import { Search } from '@components/Search';
+import { Header } from '@components/Header';
 import { MovieScroll } from '@containers/MovieScroll';
 import { GenreList } from '@containers/GenreList';
 
@@ -20,7 +21,8 @@ export default function Home() {
       </Head>
 
       <div className="p-4">
-        <Search />
+        <Header />
+        {/* <Search /> */}
         <GenreList />
         <MovieScroll
           path={'trending/all/day'}

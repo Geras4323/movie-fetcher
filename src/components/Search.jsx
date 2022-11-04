@@ -12,7 +12,7 @@ function Search() {
   }
 
   return (
-    <div className="w-full h-12 my-4 bg-white border-2 border-border rounded-full">
+    <div className="w-full max-w-3xl h-12 my-4 bg-white border-2 border-border rounded-full">
       <form
         onSubmit={handleSubmit}
         className="w-full h-full flex flex-row items-center"

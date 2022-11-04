@@ -3,9 +3,11 @@ import { useRouter } from 'next/router';
 import { getData } from '@functions/getData';
 import { Movie } from '@components/Movie';
 import { Search } from '@components/Search';
+import { MovieSkeleton } from '@components/MovieSkeleton';
 import Link from 'next/link';
 
-import { MovieSkeleton } from '@components/MovieSkeleton';
+import { LanguageContext } from '@contexts/LanguageContext';
+
 
 export default function GenreMovies() {
   const [currentGenre, setCurrentGenre] = React.useState();
@@ -14,6 +16,7 @@ export default function GenreMovies() {
   const [page, setPage] = React.useState(1);
   const [lastPage, setLastPage] = React.useState();
   const [loading, setLoading] = React.useState(true);
+  const { currentLanguage } = React.useContext(LanguageContext);
   const router = useRouter();
 
 
@@ -45,7 +48,7 @@ export default function GenreMovies() {
         try {
           const id = genreData.id;  // gets the ID
           // setCurrentGenreID(id);
-          getData({path: '/discover/movie', genresIDs: id, page: page})  // finds the movies that match with that genre's ID
+          getData({path: '/discover/movie', genresIDs: id, page: page, lang: currentLanguage})  // finds the movies that match with that genre's ID
           .then(genreMovies => {
             setFilteresMovies(prev => prev.concat(genreMovies.results))
             if (!lastPage) setLastPage(genreMovies.total_pages)
@@ -62,7 +65,7 @@ export default function GenreMovies() {
     const { genre } = router.query;
     setCurrentGenre(genre);
     findGenreId(genre);
-  }, [router.query, page])
+  }, [router.query, page, currentLanguage])
 
   return (
     <div className="p-4">
