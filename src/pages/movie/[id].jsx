@@ -105,7 +105,7 @@ export default function Detail() {
               </div>
             </div>
 
-            <div className="w-full h-auto p-4 bg-black bg-opacity-50 rounded-t-2xl z-10 absolute top-160 flex flex-col gap-4">
+            <div className="w-full h-auto p-4 bg-black bg-opacity-70 backdrop-blur-sm rounded-t-2xl z-10 absolute top-160 flex flex-col gap-4">
               <section className="w-full flex flex-row justify-between items-end gap-x-4">
                 <p className="w-auto text-2xl text-white font-semibold">{movieDetails.title}</p>
                 <p className="w-auto text-gray-200"><b>{textLang.moviePage_duration}:</b>{` ${movieDetails.runtime} min`}</p>
