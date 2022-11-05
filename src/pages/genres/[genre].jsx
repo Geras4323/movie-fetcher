@@ -41,7 +41,7 @@ export default function GenreMovies() {
 
 
   function findGenreId(genreName) {
-    getData({path: 'genre/movie/list'}) // find the genre's ID
+    getData({path: 'genre/movie/list', lang: currentLanguage}) // find the genre's ID
       .then(data => data.genres)
       .then(genres => genres.find(({ name }) => name === genreName))
       .then(genreData => {
