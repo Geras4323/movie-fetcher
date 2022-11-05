@@ -10,11 +10,28 @@ const options = [
 ]
 
 function LanguageChanger() {
-  const { currentLanguage, setCurrentLanguage } = React.useContext(LanguageContext);
+  const {
+    en,
+    es,
+    fr,
+    setTextLang,
+    currentLanguage,
+    setCurrentLanguage
+  } = React.useContext(LanguageContext);
   const [label, setLabel] = React.useState()
 
   function handleChange(option) {
     setCurrentLanguage(option.value)
+    if (option.value === 'en') {
+      setTextLang(en)
+      // console.log('english');
+    } else if (option.value === 'es') {
+      setTextLang(es)
+      // console.log('español');
+    } else if (option.value === 'fr') {
+      setTextLang(fr)
+      // console.log('fracais');
+    }
   }
 
   React.useEffect(() => {
@@ -29,7 +46,7 @@ function LanguageChanger() {
         className="w-full h-full p-2"
         onChange={handleChange}
         options={options}
-        placeholder={`${label}`}
+        placeholder={label}
       />
     </div>
   )

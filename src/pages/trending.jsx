@@ -5,12 +5,16 @@ import { Movie } from '@components/Movie';
 import { Search } from '@components/Search';
 import Link from 'next/link';
 
+import { LanguageContext} from '@contexts/LanguageContext';
+
 
 export default function Trending() {
   const [trending, setTrending] = React.useState([]);
   const [page, setPage] = React.useState(1);
   const [lastPage, setLastPage] = React.useState();
   const [loading, setLoading] = React.useState(true);
+
+  const { textLang, currentLanguage } = React.useContext(LanguageContext);
 
 
   const options = {
@@ -35,7 +39,7 @@ export default function Trending() {
 
   React.useEffect(() => {
     async function getTrendingPreview() {
-      getData({path: 'trending/all/day', page: page})
+      getData({path: 'trending/all/day', page: page, lang: currentLanguage})
         .then(data => {
           setTrending(trending => trending.concat(data.results));
           if (!lastPage) setLastPage(data.total_pages);
@@ -43,7 +47,7 @@ export default function Trending() {
         .then(() => setLoading(false))
     }
     getTrendingPreview();
-  }, [page])
+  }, [page, currentLanguage])
 
   return (
     <div className="p-4">
@@ -61,7 +65,7 @@ export default function Trending() {
                     <path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
                   </svg>
                 </Link>
-                <p className="text-2xl text-white font-semibold mb-4">Trending</p>
+                <p className="text-2xl text-white font-semibold mb-4">{textLang.trendingPage_title}</p>
               </div>
               <Search />
               <div className="g_grid-container">

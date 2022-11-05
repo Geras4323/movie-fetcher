@@ -33,7 +33,7 @@ function MovieScroll({ path, sectionTitle, seeMore, morePath }) {
         <p className="text-2xl text-white font-semibold">{sectionTitle}</p>
         {seeMore &&
           <Link href={morePath}>
-            <button className="w-24 h-full text-white border border-border rounded-lg">See more</button>
+            <button className="w-24 h-full text-white border border-border rounded-lg">{seeMore}</button>
           </Link>
         }
       </section>

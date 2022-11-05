@@ -2,15 +2,16 @@ import React from 'react';
 
 import Head from 'next/head'
 
-import { Search } from '@components/Search';
 import { Header } from '@components/Header';
 import { MovieScroll } from '@containers/MovieScroll';
 import { GenreList } from '@containers/GenreList';
 
 import { FavouritesContext } from '@contexts/FavouritesContext';
+import { LanguageContext } from '@contexts/LanguageContext';
 
 
 export default function Home() {
+  const { textLang } = React.useContext(LanguageContext);
   const { localFavourites } = React.useContext(FavouritesContext);
   const favsAvailable = localFavourites.length >= 1;
 
@@ -22,28 +23,27 @@ export default function Home() {
 
       <div className="p-4">
         <Header />
-        {/* <Search /> */}
         <GenreList />
         <MovieScroll
           path={'trending/all/day'}
-          sectionTitle={'Trending'}
-          seeMore
+          sectionTitle={textLang.movieScroll_trendingTitle}
+          seeMore={textLang.movieScroll_seeMore}
           morePath={'/trending'}
         />
         {favsAvailable &&
           <MovieScroll
-            sectionTitle={'Your Favourites'}
-            seeMore
+            sectionTitle={textLang.movieScroll_favouritesTitle}
+            seeMore={textLang.movieScroll_seeMore}
             morePath={'/favourites'}
           />
         }
         <MovieScroll
           path={'/movie/popular'}
-          sectionTitle={'Popular Movies'}
+          sectionTitle={textLang.movieScroll_popularMoviesTitle}
         />
         <MovieScroll
           path={'/tv/popular'}
-          sectionTitle={'Popular TV Shows'}
+          sectionTitle={textLang.movieScroll_popularShowsTitle}
         />
       </div>
     </>

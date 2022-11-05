@@ -23,7 +23,7 @@ export default function Detail() {
   const [imagen, setImagen] = React.useState()
   const [isFavourite, setIsFavourite] = React.useState(false)
 
-  const { currentLanguage } = React.useContext(LanguageContext);
+  const { textLang, currentLanguage } = React.useContext(LanguageContext);
 
   async function getDetails(id) {
     try {
@@ -77,7 +77,7 @@ export default function Detail() {
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" className='w-10 h-8 fill-current text-gray-100'>
                           <path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
                         </svg>
-                        <p className="text-xl text-gray-100 font-bold">Home</p>
+                        <p className="text-xl text-gray-100 font-bold">{textLang.moviePage_home}</p>
                       </section>
                     </Link>
                     {isFavourite
@@ -108,19 +108,19 @@ export default function Detail() {
             <div className="w-full h-auto p-4 bg-black bg-opacity-50 rounded-t-2xl z-10 absolute top-160 flex flex-col gap-4">
               <section className="w-full flex flex-row justify-between items-end gap-x-4">
                 <p className="w-auto text-2xl text-white font-semibold">{movieDetails.title}</p>
-                <p className="w-auto text-gray-200"><b>Duration:</b>{` ${movieDetails.runtime} min`}</p>
+                <p className="w-auto text-gray-200"><b>{textLang.moviePage_duration}:</b>{` ${movieDetails.runtime} min`}</p>
               </section>
               <p className="text-lg text-gray-400 font-semibold">{movieDetails.overview}</p>
               <section>
-                <p className="w-auto text-gray-200"><b>Released:</b>{` ${movieDetails.release_date}`}</p>
-                <p className="w-auto text-gray-200"><b>Original language:</b>{` ${movieDetails.original_language}`}</p>
-                <p className="w-auto text-gray-200"><b>Vote average:</b>{` ${Math.round(movieDetails.vote_average * 10) / 10}`}</p>
-                <p className="w-auto text-gray-200"><b>Genres:</b>{`${
+                <p className="w-auto text-gray-200"><b>{textLang.moviePage_released}:</b>{` ${movieDetails.release_date}`}</p>
+                <p className="w-auto text-gray-200"><b>{textLang.moviePage_language}:</b>{` ${movieDetails.original_language}`}</p>
+                <p className="w-auto text-gray-200"><b>{textLang.moviePage_voteAvg}:</b>{` ${Math.round(movieDetails.vote_average * 10) / 10}`}</p>
+                <p className="w-auto text-gray-200"><b>{textLang.moviePage_genres}:</b>{`${
                   movieDetails.genres.map(genre => ` ${genre.name}`)
                 }`}</p>
               </section>
               <section>
-                <p className="w-auto text-2xl mb-2 text-white">Related</p>
+                <p className="w-auto text-2xl mb-2 text-white">{textLang.moviePage_related}</p>
                 <RelatedList
                   id={movieDetails.id}
                 />

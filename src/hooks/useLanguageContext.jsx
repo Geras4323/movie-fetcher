@@ -1,13 +1,20 @@
 import React from 'react';
 
+import { en } from '@languages/en';
+import { es } from '@languages/es';
+import { fr } from '@languages/fr';
+
 function useLanguageContext() {
   const [currentLanguage, setCurrentLanguage] = React.useState('en');
+  const [textLang, setTextLang] = React.useState(en);
 
-  React.useEffect(() => {
-    // console.log(currentLanguage);
-  }, [currentLanguage])
 
   return {
+    en,
+    es,
+    fr,
+    textLang,
+    setTextLang,
     currentLanguage,
     setCurrentLanguage
   }

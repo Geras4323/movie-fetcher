@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 function GenreList() {
   const [genres, setGenres] = React.useState([]);
-  const { currentLanguage } = React.useContext(LanguageContext);
+  const { textLang, currentLanguage } = React.useContext(LanguageContext);
 
   React.useEffect(() => {
     async function getGenreList() {
@@ -20,7 +20,7 @@ function GenreList() {
 
   return (
     <div className="mb-8">
-      <p className="mb-4 text-2xl text-white font-semibold">Search by Genre</p>
+      <p className="mb-4 text-2xl text-white font-semibold">{textLang.genreList_title}</p>
       <div className="w-full h-auto g_grid-genres">
         {genres.map((genre) => (
           <Link href={`/genres/${genre.name}`} key={genre.id}>
